@@ -24,7 +24,7 @@ const Budget = () => {
         <label htmlFor="budget">Update Budget</label>
             <input
                 required
-                type="text"
+                type="number"
                 className="form-control"
                 id="budget"
                 value={updateBudget}
