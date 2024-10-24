@@ -32,7 +32,7 @@ const Budget = () => {
                      handleBudgetUpdate(event.target.value)}
             ></input>
             <div className="col-sm">
-          <button type="submit" className="btn btn-primary mt-3">
+          <button data-testid="budgetSaveID" type="submit" className="btn btn-primary mt-3">
             Save
           </button>
         </div>
