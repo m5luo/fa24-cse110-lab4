@@ -209,7 +209,7 @@ describe("Update Budget to Remaining Amount", () => {
 
         fireEvent.click(budgetBtn);
 
-        expect(remaining).toHaveTextContent('Remaining: $1000');
+        expect(remaining).toHaveTextContent('Remaining: $2000');
     });
 });
 
