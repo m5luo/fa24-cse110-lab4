@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Expense } from "../../types/types";
 import { AppContext } from "../../context/AppContext";
+import { deleteExpense } from "../../utils/expense-utils";
 
 const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
@@ -9,6 +10,7 @@ const ExpenseItem = (currentExpense: Expense) => {
   const handleDeleteExpense = (currentExpense: Expense) => {
     // Exercise: Remove expense from expenses context array
     console.log(context.expenses)
+    deleteExpense(currentExpense.id)
     context.setExpenses(() => {
         return context.expenses.filter((expense) => expense.id !== currentExpense.id);
     })

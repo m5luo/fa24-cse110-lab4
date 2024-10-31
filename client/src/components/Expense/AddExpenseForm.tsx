@@ -12,15 +12,14 @@ const expenseInitialState: Expense = {
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
-  createExpense(expenseInitialState);
   const context = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables
   const[expense, setExpense] = useState(expenseInitialState)
-  const[name, setName] = useState("");
-  const handleNameInput = (name: string) => {
-    setName(name);
-    setExpense({ ...expense, id: name, description: name });
+  const[description, setDescription] = useState("");
+  const handleNameInput = (description: string) => {
+    setDescription(description);
+    setExpense({ ...expense, id: description, description: description });
   }
   const[cost, setCost] = useState("0");
   const handleCostInput = (cost: string) => {
@@ -32,6 +31,7 @@ const AddExpenseForm = () => {
     event.preventDefault();
 
     // Exercise: Add add new expense to expenses context array
+    createExpense(expense);
     context.setExpenses(context.expenses.concat(expense));
   };
 
@@ -39,13 +39,13 @@ const AddExpenseForm = () => {
     <form onSubmit={(event) => onSubmit(event)}>
       <div className="row">
         <div className="col-sm">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Description</label>
           <input
             required
             type="text"
             className="form-control"
-            id="name"
-            value={name}
+            id="description"
+            value={description}
             // HINT: onChange={}
             onChange={(event) =>
                 handleNameInput(event.target.value)}
