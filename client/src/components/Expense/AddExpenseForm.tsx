@@ -12,7 +12,6 @@ const expenseInitialState: Expense = {
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
-  
   const context = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables

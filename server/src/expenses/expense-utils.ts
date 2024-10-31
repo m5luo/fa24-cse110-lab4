@@ -27,7 +27,7 @@ export function deleteExpense(req: Request, res: Response, expenses: Expense[]) 
     }
 
     const index = expenses.findIndex(expense => expense.id === id);
-    // console.log("deleted",index)
+    console.log("deleted",index)
     
     if (index === -1) {
         return res.status(404).send({ error: "Expense index not found" });
