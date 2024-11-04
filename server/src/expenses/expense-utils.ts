@@ -2,23 +2,6 @@ import { Expense } from "../types";
 import { Request, Response } from "express";
 import { Database } from "sqlite";
 
-// export function createExpenseServer(req: Request, res: Response, expenses: Expense[]) {
-//     const { id, cost, description } = req.body;
-
-//     if (!description || !id || !cost) {
-//         return res.status(400).send({ error: "Missing required fields" });
-//     }
-
-//     const newExpense: Expense = {
-//         id: id,
-//         description,
-//         cost,
-//     };
-
-//     expenses.push(newExpense);
-//     res.status(201).send(newExpense);
-// }
-
 export async function createExpenseServer(req: Request, res: Response, db: Database) {
     
     try {
@@ -48,28 +31,19 @@ export async function deleteExpense(req: Request, res: Response, db: Database) {
     }
 
     try {
+        let record = db.get('SELECT 1 FROM table_name WHERE id=?;', [id]);
+        if (!record) {
+            return res.status(400).send({ error: `Expense does not exist` });
+        }
         await db.run('DELETE FROM expenses WHERE id=?;', [id]);
     } catch (error) {
-        return res.status(400).send({ error: `Expense could not be created, + ${error}` });
+        return res.status(400).send({ error: `Expense could not be deleted, + ${error}` });
     };
-
-    // const index = expenses.findIndex(expense => expense.id === id);
-    // console.log("deleted",index)
-    
-    // if (index === -1) {
-    //     return res.status(404).send({ error: "Expense index not found" });
-    // }
-    // // const [deletedExpense] = expenses.splice(index, 1);
-
-    // expenses = expenses.splice(index,1);
-    // console.log(JSON.stringify(expenses));
-    // return res.status(200).send(expenses);
 }
 
 export async function getExpenses(req: Request, res: Response, db: Database) {
     // res.status(200).send({ "data": expenses });
     try {
-        // await db.get('SELECT description, cost FROM expenses;');
         let rows = await db.all('SELECT description, cost FROM expenses;');
         res.status(201).send({"data":rows});
     } catch (error) {
